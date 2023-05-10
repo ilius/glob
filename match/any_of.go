@@ -10,13 +10,13 @@ func NewAnyOf(m ...Matcher) AnyOf {
 	return AnyOf{Matchers(m)}
 }
 
-func (self *AnyOf) Add(m Matcher) error {
-	self.Matchers = append(self.Matchers, m)
+func (a *AnyOf) Add(m Matcher) error {
+	a.Matchers = append(a.Matchers, m)
 	return nil
 }
 
-func (self AnyOf) Match(s string) bool {
-	for _, m := range self.Matchers {
+func (a AnyOf) Match(s string) bool {
+	for _, m := range a.Matchers {
 		if m.Match(s) {
 			return true
 		}
@@ -25,11 +25,11 @@ func (self AnyOf) Match(s string) bool {
 	return false
 }
 
-func (self AnyOf) Index(s string) (int, []int) {
+func (a AnyOf) Index(s string) (int, []int) {
 	index := -1
 
 	segments := acquireSegments(len(s))
-	for _, m := range self.Matchers {
+	for _, m := range a.Matchers {
 		idx, seg := m.Index(s)
 		if idx == -1 {
 			continue
@@ -57,9 +57,9 @@ func (self AnyOf) Index(s string) (int, []int) {
 	return index, segments
 }
 
-func (self AnyOf) Len() (l int) {
+func (a AnyOf) Len() (l int) {
 	l = -1
-	for _, m := range self.Matchers {
+	for _, m := range a.Matchers {
 		ml := m.Len()
 		switch {
 		case l == -1:
@@ -77,6 +77,6 @@ func (self AnyOf) Len() (l int) {
 	return
 }
 
-func (self AnyOf) String() string {
-	return fmt.Sprintf("<any_of:[%s]>", self.Matchers)
+func (a AnyOf) String() string {
+	return fmt.Sprintf("<any_of:[%s]>", a.Matchers)
 }

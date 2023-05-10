@@ -14,12 +14,12 @@ func NewAny(s []rune) Any {
 	return Any{s}
 }
 
-func (self Any) Match(s string) bool {
-	return strings.IndexAnyRunes(s, self.Separators) == -1
+func (a Any) Match(s string) bool {
+	return strings.IndexAnyRunes(s, a.Separators) == -1
 }
 
-func (self Any) Index(s string) (int, []int) {
-	found := strings.IndexAnyRunes(s, self.Separators)
+func (a Any) Index(s string) (int, []int) {
+	found := strings.IndexAnyRunes(s, a.Separators)
 	switch found {
 	case -1:
 	case 0:
@@ -37,10 +37,10 @@ func (self Any) Index(s string) (int, []int) {
 	return 0, segments
 }
 
-func (self Any) Len() int {
+func (a Any) Len() int {
 	return lenNo
 }
 
-func (self Any) String() string {
-	return fmt.Sprintf("<any:![%s]>", string(self.Separators))
+func (a Any) String() string {
+	return fmt.Sprintf("<any:![%s]>", string(a.Separators))
 }

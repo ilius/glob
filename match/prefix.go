@@ -14,13 +14,13 @@ func NewPrefix(p string) Prefix {
 	return Prefix{p}
 }
 
-func (self Prefix) Index(s string) (int, []int) {
-	idx := strings.Index(s, self.Prefix)
+func (p Prefix) Index(s string) (int, []int) {
+	idx := strings.Index(s, p.Prefix)
 	if idx == -1 {
 		return -1, nil
 	}
 
-	length := len(self.Prefix)
+	length := len(p.Prefix)
 	var sub string
 	if len(s) > idx+length {
 		sub = s[idx+length:]
@@ -37,14 +37,14 @@ func (self Prefix) Index(s string) (int, []int) {
 	return idx, segments
 }
 
-func (self Prefix) Len() int {
+func (p Prefix) Len() int {
 	return lenNo
 }
 
-func (self Prefix) Match(s string) bool {
-	return strings.HasPrefix(s, self.Prefix)
+func (p Prefix) Match(s string) bool {
+	return strings.HasPrefix(s, p.Prefix)
 }
 
-func (self Prefix) String() string {
-	return fmt.Sprintf("<prefix:%s>", self.Prefix)
+func (p Prefix) String() string {
+	return fmt.Sprintf("<prefix:%s>", p.Prefix)
 }

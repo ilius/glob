@@ -16,22 +16,22 @@ func NewSingle(s []rune) Single {
 	return Single{s}
 }
 
-func (self Single) Match(s string) bool {
+func (sing Single) Match(s string) bool {
 	r, w := utf8.DecodeRuneInString(s)
 	if len(s) > w {
 		return false
 	}
 
-	return runes.IndexRune(self.Separators, r) == -1
+	return runes.IndexRune(sing.Separators, r) == -1
 }
 
-func (self Single) Len() int {
+func (sing Single) Len() int {
 	return lenOne
 }
 
-func (self Single) Index(s string) (int, []int) {
+func (sing Single) Index(s string) (int, []int) {
 	for i, r := range s {
-		if runes.IndexRune(self.Separators, r) == -1 {
+		if runes.IndexRune(sing.Separators, r) == -1 {
 			return i, segmentsByRuneLength[utf8.RuneLen(r)]
 		}
 	}
@@ -39,6 +39,6 @@ func (self Single) Index(s string) (int, []int) {
 	return -1, nil
 }
 
-func (self Single) String() string {
-	return fmt.Sprintf("<single:![%s]>", string(self.Separators))
+func (sing Single) String() string {
+	return fmt.Sprintf("<single:![%s]>", string(sing.Separators))
 }

@@ -14,24 +14,24 @@ func NewRange(lo, hi rune, not bool) Range {
 	return Range{lo, hi, not}
 }
 
-func (self Range) Len() int {
+func (Range) Len() int {
 	return lenOne
 }
 
-func (self Range) Match(s string) bool {
+func (rng Range) Match(s string) bool {
 	r, w := utf8.DecodeRuneInString(s)
 	if len(s) > w {
 		return false
 	}
 
-	inRange := r >= self.Lo && r <= self.Hi
+	inRange := r >= rng.Lo && r <= rng.Hi
 
-	return inRange == !self.Not
+	return inRange == !rng.Not
 }
 
-func (self Range) Index(s string) (int, []int) {
+func (rng Range) Index(s string) (int, []int) {
 	for i, r := range s {
-		if self.Not != (r >= self.Lo && r <= self.Hi) {
+		if rng.Not != (r >= rng.Lo && r <= rng.Hi) {
 			return i, segmentsByRuneLength[utf8.RuneLen(r)]
 		}
 	}
@@ -39,10 +39,10 @@ func (self Range) Index(s string) (int, []int) {
 	return -1, nil
 }
 
-func (self Range) String() string {
+func (rng Range) String() string {
 	var not string
-	if self.Not {
+	if rng.Not {
 		not = "!"
 	}
-	return fmt.Sprintf("<range:%s[%s,%s]>", not, string(self.Lo), string(self.Hi))
+	return fmt.Sprintf("<range:%s[%s,%s]>", not, string(rng.Lo), string(rng.Hi))
 }

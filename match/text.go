@@ -23,23 +23,23 @@ func NewText(s string) Text {
 	}
 }
 
-func (self Text) Match(s string) bool {
-	return self.Str == s
+func (tx Text) Match(s string) bool {
+	return tx.Str == s
 }
 
-func (self Text) Len() int {
-	return self.RunesLength
+func (tx Text) Len() int {
+	return tx.RunesLength
 }
 
-func (self Text) Index(s string) (int, []int) {
-	index := strings.Index(s, self.Str)
+func (tx Text) Index(s string) (int, []int) {
+	index := strings.Index(s, tx.Str)
 	if index == -1 {
 		return -1, nil
 	}
 
-	return index, self.Segments
+	return index, tx.Segments
 }
 
-func (self Text) String() string {
-	return fmt.Sprintf("<text:`%v`>", self.Str)
+func (tx Text) String() string {
+	return fmt.Sprintf("<text:`%v`>", tx.Str)
 }

@@ -13,11 +13,11 @@ func NewMin(l int) Min {
 	return Min{l}
 }
 
-func (self Min) Match(s string) bool {
+func (mn Min) Match(s string) bool {
 	var l int
 	for range s {
 		l += 1
-		if l >= self.Limit {
+		if l >= mn.Limit {
 			return true
 		}
 	}
@@ -25,10 +25,10 @@ func (self Min) Match(s string) bool {
 	return false
 }
 
-func (self Min) Index(s string) (int, []int) {
+func (mn Min) Index(s string) (int, []int) {
 	var count int
 
-	c := len(s) - self.Limit + 1
+	c := len(s) - mn.Limit + 1
 	if c <= 0 {
 		return -1, nil
 	}
@@ -36,7 +36,7 @@ func (self Min) Index(s string) (int, []int) {
 	segments := acquireSegments(c)
 	for i, r := range s {
 		count++
-		if count >= self.Limit {
+		if count >= mn.Limit {
 			segments = append(segments, i+utf8.RuneLen(r))
 		}
 	}
@@ -48,10 +48,10 @@ func (self Min) Index(s string) (int, []int) {
 	return 0, segments
 }
 
-func (self Min) Len() int {
+func (mn Min) Len() int {
 	return lenNo
 }
 
-func (self Min) String() string {
-	return fmt.Sprintf("<min:%d>", self.Limit)
+func (mn Min) String() string {
+	return fmt.Sprintf("<min:%d>", mn.Limit)
 }

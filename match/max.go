@@ -13,11 +13,11 @@ func NewMax(l int) Max {
 	return Max{l}
 }
 
-func (self Max) Match(s string) bool {
+func (mx Max) Match(s string) bool {
 	var l int
 	for range s {
 		l += 1
-		if l > self.Limit {
+		if l > mx.Limit {
 			return false
 		}
 	}
@@ -25,13 +25,13 @@ func (self Max) Match(s string) bool {
 	return true
 }
 
-func (self Max) Index(s string) (int, []int) {
-	segments := acquireSegments(self.Limit + 1)
+func (mx Max) Index(s string) (int, []int) {
+	segments := acquireSegments(mx.Limit + 1)
 	segments = append(segments, 0)
 	var count int
 	for i, r := range s {
 		count++
-		if count > self.Limit {
+		if count > mx.Limit {
 			break
 		}
 		segments = append(segments, i+utf8.RuneLen(r))
@@ -40,10 +40,10 @@ func (self Max) Index(s string) (int, []int) {
 	return 0, segments
 }
 
-func (self Max) Len() int {
+func (mx Max) Len() int {
 	return lenNo
 }
 
-func (self Max) String() string {
-	return fmt.Sprintf("<max:%d>", self.Limit)
+func (mx Max) String() string {
+	return fmt.Sprintf("<max:%d>", mx.Limit)
 }

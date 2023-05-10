@@ -28,7 +28,7 @@ func (m Matchers) String() string {
 		s = append(s, fmt.Sprint(matcher))
 	}
 
-	return fmt.Sprintf("%s", strings.Join(s, ","))
+	return strings.Join(s, ",")
 }
 
 // appendMerge merges and sorts given already SORTED and UNIQUE segments.

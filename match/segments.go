@@ -87,5 +87,5 @@ func releaseSegments(s []int) {
 		return
 	}
 
-	segmentsPools[getTableIndex(c)].Put(s)
+	segmentsPools[getTableIndex(c)].Put(&s)
 }

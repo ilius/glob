@@ -46,35 +46,35 @@ func NewBTree(Value, Left, Right Matcher) (tree BTree) {
 	return tree
 }
 
-func (self BTree) Len() int {
-	return self.LengthRunes
+func (bt BTree) Len() int {
+	return bt.LengthRunes
 }
 
 // todo?
-func (self BTree) Index(s string) (index int, segments []int) {
+func (bt BTree) Index(s string) (index int, segments []int) {
 	//inputLen := len(s)
 	//// try to cut unnecessary parts
 	//// by knowledge of length of right and left part
-	//offset, limit := self.offsetLimit(inputLen)
+	//offset, limit := bt.offsetLimit(inputLen)
 	//for offset < limit {
 	//	// search for matching part in substring
-	//	vi, segments := self.Value.Index(s[offset:limit])
+	//	vi, segments := bt.Value.Index(s[offset:limit])
 	//	if index == -1 {
 	//		return -1, nil
 	//	}
-	//	if self.Left == nil {
+	//	if bt.Left == nil {
 	//		if index != offset {
 	//			return -1, nil
 	//		}
 	//	} else {
 	//		left := s[:offset+vi]
-	//		i := self.Left.IndexSuffix(left)
+	//		i := bt.Left.IndexSuffix(left)
 	//		if i == -1 {
 	//			return -1, nil
 	//		}
 	//		index = i
 	//	}
-	//	if self.Right != nil {
+	//	if bt.Right != nil {
 	//		for _, seg := range segments {
 	//			right := s[:offset+vi+seg]
 	//		}
@@ -82,8 +82,8 @@ func (self BTree) Index(s string) (index int, segments []int) {
 
 	//	l := s[:offset+index]
 	//	var left bool
-	//	if self.Left != nil {
-	//		left = self.Left.Index(l)
+	//	if bt.Left != nil {
+	//		left = bt.Left.Index(l)
 	//	} else {
 	//		left = l == ""
 	//	}
@@ -92,15 +92,15 @@ func (self BTree) Index(s string) (index int, segments []int) {
 	return -1, nil
 }
 
-func (self BTree) Match(s string) bool {
+func (bt BTree) Match(s string) bool {
 	inputLen := len(s)
 	// try to cut unnecessary parts
 	// by knowledge of length of right and left part
-	offset, limit := self.offsetLimit(inputLen)
+	offset, limit := bt.offsetLimit(inputLen)
 
 	for offset < limit {
 		// search for matching part in substring
-		index, segments := self.Value.Index(s[offset:limit])
+		index, segments := bt.Value.Index(s[offset:limit])
 		if index == -1 {
 			releaseSegments(segments)
 			return false
@@ -108,8 +108,8 @@ func (self BTree) Match(s string) bool {
 
 		l := s[:offset+index]
 		var left bool
-		if self.Left != nil {
-			left = self.Left.Match(l)
+		if bt.Left != nil {
+			left = bt.Left.Match(l)
 		} else {
 			left = l == ""
 		}
@@ -127,8 +127,8 @@ func (self BTree) Match(s string) bool {
 					r = s[offset+index+length:]
 				}
 
-				if self.Right != nil {
-					right = self.Right.Match(r)
+				if bt.Right != nil {
+					right = bt.Right.Match(r)
 				} else {
 					right = r == ""
 				}
@@ -149,37 +149,37 @@ func (self BTree) Match(s string) bool {
 	return false
 }
 
-func (self BTree) offsetLimit(inputLen int) (offset int, limit int) {
-	// self.Length, self.RLen and self.LLen are values meaning the length of runes for each part
+func (bt BTree) offsetLimit(inputLen int) (offset int, limit int) {
+	// bt.Length, bt.RLen and bt.LLen are values meaning the length of runes for each part
 	// here we manipulating byte length for better optimizations
 	// but these checks still works, cause minLen of 1-rune string is 1 byte.
-	if self.LengthRunes != -1 && self.LengthRunes > inputLen {
+	if bt.LengthRunes != -1 && bt.LengthRunes > inputLen {
 		return 0, 0
 	}
-	if self.LeftLengthRunes >= 0 {
-		offset = self.LeftLengthRunes
+	if bt.LeftLengthRunes >= 0 {
+		offset = bt.LeftLengthRunes
 	}
-	if self.RightLengthRunes >= 0 {
-		limit = inputLen - self.RightLengthRunes
+	if bt.RightLengthRunes >= 0 {
+		limit = inputLen - bt.RightLengthRunes
 	} else {
 		limit = inputLen
 	}
 	return offset, limit
 }
 
-func (self BTree) String() string {
+func (bt BTree) String() string {
 	const n string = "<nil>"
 	var l, r string
-	if self.Left == nil {
+	if bt.Left == nil {
 		l = n
 	} else {
-		l = self.Left.String()
+		l = bt.Left.String()
 	}
-	if self.Right == nil {
+	if bt.Right == nil {
 		r = n
 	} else {
-		r = self.Right.String()
+		r = bt.Right.String()
 	}
 
-	return fmt.Sprintf("<btree:[%s<-%s->%s]>", l, self.Value, r)
+	return fmt.Sprintf("<btree:[%s<-%s->%s]>", l, bt.Value, r)
 }

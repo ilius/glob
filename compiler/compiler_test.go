@@ -618,7 +618,7 @@ func TestCompiler(t *testing.T) {
 		}
 
 		if !reflect.DeepEqual(m, test.result) {
-			t.Errorf("[%d] Compile():\nexp: %#v\nact: %#v\n\ngraphviz:\nexp:\n%s\nact:\n%s\n", id, test.result, m, debug.Graphviz("", test.result.(match.Matcher)), debug.Graphviz("", m.(match.Matcher)))
+			t.Errorf("[%d] Compile():\nexp: %#v\nact: %#v\n\ngraphviz:\nexp:\n%s\nact:\n%s\n", id, test.result, m, debug.Graphviz("", test.result), debug.Graphviz("", m))
 			continue
 		}
 	}

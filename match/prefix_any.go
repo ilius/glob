@@ -17,15 +17,15 @@ func NewPrefixAny(s string, sep []rune) PrefixAny {
 	return PrefixAny{s, sep}
 }
 
-func (self PrefixAny) Index(s string) (int, []int) {
-	idx := strings.Index(s, self.Prefix)
+func (pa PrefixAny) Index(s string) (int, []int) {
+	idx := strings.Index(s, pa.Prefix)
 	if idx == -1 {
 		return -1, nil
 	}
 
-	n := len(self.Prefix)
+	n := len(pa.Prefix)
 	sub := s[idx+n:]
-	i := sutil.IndexAnyRunes(sub, self.Separators)
+	i := sutil.IndexAnyRunes(sub, pa.Separators)
 	if i > -1 {
 		sub = sub[:i]
 	}
@@ -39,17 +39,17 @@ func (self PrefixAny) Index(s string) (int, []int) {
 	return idx, seg
 }
 
-func (self PrefixAny) Len() int {
+func (pa PrefixAny) Len() int {
 	return lenNo
 }
 
-func (self PrefixAny) Match(s string) bool {
-	if !strings.HasPrefix(s, self.Prefix) {
+func (pa PrefixAny) Match(s string) bool {
+	if !strings.HasPrefix(s, pa.Prefix) {
 		return false
 	}
-	return sutil.IndexAnyRunes(s[len(self.Prefix):], self.Separators) == -1
+	return sutil.IndexAnyRunes(s[len(pa.Prefix):], pa.Separators) == -1
 }
 
-func (self PrefixAny) String() string {
-	return fmt.Sprintf("<prefix_any:%s![%s]>", self.Prefix, string(self.Separators))
+func (pa PrefixAny) String() string {
+	return fmt.Sprintf("<prefix_any:%s![%s]>", pa.Prefix, string(pa.Separators))
 }

@@ -13,13 +13,13 @@ func NewPrefixSuffix(p, s string) PrefixSuffix {
 	return PrefixSuffix{p, s}
 }
 
-func (self PrefixSuffix) Index(s string) (int, []int) {
-	prefixIdx := strings.Index(s, self.Prefix)
+func (ps PrefixSuffix) Index(s string) (int, []int) {
+	prefixIdx := strings.Index(s, ps.Prefix)
 	if prefixIdx == -1 {
 		return -1, nil
 	}
 
-	suffixLen := len(self.Suffix)
+	suffixLen := len(ps.Suffix)
 	if suffixLen <= 0 {
 		return prefixIdx, []int{len(s) - prefixIdx}
 	}
@@ -30,7 +30,7 @@ func (self PrefixSuffix) Index(s string) (int, []int) {
 
 	segments := acquireSegments(len(s) - prefixIdx)
 	for sub := s[prefixIdx:]; ; {
-		suffixIdx := strings.LastIndex(sub, self.Suffix)
+		suffixIdx := strings.LastIndex(sub, ps.Suffix)
 		if suffixIdx == -1 {
 			break
 		}
@@ -49,14 +49,14 @@ func (self PrefixSuffix) Index(s string) (int, []int) {
 	return prefixIdx, segments
 }
 
-func (self PrefixSuffix) Len() int {
+func (ps PrefixSuffix) Len() int {
 	return lenNo
 }
 
-func (self PrefixSuffix) Match(s string) bool {
-	return strings.HasPrefix(s, self.Prefix) && strings.HasSuffix(s, self.Suffix)
+func (ps PrefixSuffix) Match(s string) bool {
+	return strings.HasPrefix(s, ps.Prefix) && strings.HasSuffix(s, ps.Suffix)
 }
 
-func (self PrefixSuffix) String() string {
-	return fmt.Sprintf("<prefix_suffix:[%s,%s]>", self.Prefix, self.Suffix)
+func (ps PrefixSuffix) String() string {
+	return fmt.Sprintf("<prefix_suffix:[%s,%s]>", ps.Prefix, ps.Suffix)
 }

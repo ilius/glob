@@ -13,7 +13,7 @@ func benchPool(i int, b *testing.B) {
 	b.RunParallel(func(pb *testing.PB) {
 		for pb.Next() {
 			s := pool.Get().([]int)[:0]
-			pool.Put(s)
+			pool.Put(&s)
 		}
 	})
 }

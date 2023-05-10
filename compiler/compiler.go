@@ -28,7 +28,7 @@ func optimizeMatcher(matcher match.Matcher) match.Matcher {
 		return m
 
 	case match.List:
-		if m.Not == false && len(m.List) == 1 {
+		if !m.Not && len(m.List) == 1 {
 			return match.NewText(string(m.List))
 		}
 
