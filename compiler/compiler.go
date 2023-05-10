@@ -5,6 +5,7 @@ package compiler
 
 import (
 	"fmt"
+	"log"
 	"reflect"
 
 	"github.com/gobwas/glob/match"
@@ -242,15 +243,24 @@ func glueMatchersAsEvery(matchers []match.Matcher) match.Matcher {
 	every := match.NewEveryOf()
 
 	if min > 0 {
-		every.Add(match.NewMin(min))
+		err := every.Add(match.NewMin(min))
+		if err != nil {
+			log.Println(err)
+		}
 
 		if !hasAny && !hasSuper {
-			every.Add(match.NewMax(min))
+			err := every.Add(match.NewMax(min))
+			if err != nil {
+				log.Println(err)
+			}
 		}
 	}
 
 	if len(separator) > 0 {
-		every.Add(match.NewContains(string(separator), true))
+		err := every.Add(match.NewContains(string(separator), true))
+		if err != nil {
+			log.Println(err)
+		}
 	}
 
 	return every

@@ -39,6 +39,10 @@ func main() {
 	verbose := flag.Bool("v", false, "verbose")
 	flag.Parse()
 
+	if pattern == nil {
+		panic("pattern is nil")
+	}
+
 	if *pattern == "" {
 		flag.Usage()
 		os.Exit(1)
@@ -69,7 +73,10 @@ func main() {
 
 	cb := testing.Benchmark(func(b *testing.B) {
 		for i := 0; i < b.N; i++ {
-			glob.Compile(*pattern, separators...)
+			_, err := glob.Compile(*pattern, separators...)
+			if err != nil {
+				panic(err)
+			}
 		}
 	})
 	fmt.Println("compile:", benchString(cb))

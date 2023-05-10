@@ -209,7 +209,10 @@ func TestQuoteMeta(t *testing.T) {
 
 func BenchmarkParseGlob(b *testing.B) {
 	for i := 0; i < b.N; i++ {
-		Compile(pattern_all)
+		_, err := Compile(pattern_all)
+		if err != nil {
+			panic(err)
+		}
 	}
 }
 
