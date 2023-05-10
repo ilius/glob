@@ -3,12 +3,13 @@ package main
 import (
 	"flag"
 	"fmt"
-	"github.com/gobwas/glob"
-	"github.com/gobwas/glob/match"
-	"github.com/gobwas/glob/match/debug"
 	"os"
 	"strings"
 	"unicode/utf8"
+
+	"github.com/gobwas/glob"
+	"github.com/gobwas/glob/match"
+	"github.com/gobwas/glob/match/debug"
 )
 
 func main() {

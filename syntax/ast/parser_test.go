@@ -27,7 +27,7 @@ func TestParseString(t *testing.T) {
 		tree   *Node
 	}{
 		{
-			//pattern: "abc",
+			// pattern: "abc",
 			tokens: []lexer.Token{
 				{lexer.Text, "abc"},
 				{lexer.EOF, ""},
@@ -37,7 +37,7 @@ func TestParseString(t *testing.T) {
 			),
 		},
 		{
-			//pattern: "a*c",
+			// pattern: "a*c",
 			tokens: []lexer.Token{
 				{lexer.Text, "a"},
 				{lexer.Any, "*"},
@@ -51,7 +51,7 @@ func TestParseString(t *testing.T) {
 			),
 		},
 		{
-			//pattern: "a**c",
+			// pattern: "a**c",
 			tokens: []lexer.Token{
 				{lexer.Text, "a"},
 				{lexer.Super, "**"},
@@ -65,7 +65,7 @@ func TestParseString(t *testing.T) {
 			),
 		},
 		{
-			//pattern: "a?c",
+			// pattern: "a?c",
 			tokens: []lexer.Token{
 				{lexer.Text, "a"},
 				{lexer.Single, "?"},
@@ -79,7 +79,7 @@ func TestParseString(t *testing.T) {
 			),
 		},
 		{
-			//pattern: "[!a-z]",
+			// pattern: "[!a-z]",
 			tokens: []lexer.Token{
 				{lexer.RangeOpen, "["},
 				{lexer.Not, "!"},
@@ -94,7 +94,7 @@ func TestParseString(t *testing.T) {
 			),
 		},
 		{
-			//pattern: "[az]",
+			// pattern: "[az]",
 			tokens: []lexer.Token{
 				{lexer.RangeOpen, "["},
 				{lexer.Text, "az"},
@@ -106,7 +106,7 @@ func TestParseString(t *testing.T) {
 			),
 		},
 		{
-			//pattern: "{a,z}",
+			// pattern: "{a,z}",
 			tokens: []lexer.Token{
 				{lexer.TermsOpen, "{"},
 				{lexer.Text, "a"},
@@ -127,7 +127,7 @@ func TestParseString(t *testing.T) {
 			),
 		},
 		{
-			//pattern: "/{z,ab}*",
+			// pattern: "/{z,ab}*",
 			tokens: []lexer.Token{
 				{lexer.Text, "/"},
 				{lexer.TermsOpen, "{"},
@@ -152,7 +152,7 @@ func TestParseString(t *testing.T) {
 			),
 		},
 		{
-			//pattern: "{a,{x,y},?,[a-z],[!qwe]}",
+			// pattern: "{a,{x,y},?,[a-z],[!qwe]}",
 			tokens: []lexer.Token{
 				{lexer.TermsOpen, "{"},
 				{lexer.Text, "a"},

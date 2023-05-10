@@ -20,6 +20,7 @@ type equalTest struct {
 func newIndexTest(s, sep string, out int) indexTest {
 	return indexTest{[]rune(s), []rune(sep), out}
 }
+
 func newEqualTest(s, sep string, out bool) equalTest {
 	return equalTest{[]rune(s), []rune(sep), out}
 }
@@ -117,6 +118,7 @@ func BenchmarkLastIndexRunes(b *testing.B) {
 		LastIndex(r, n)
 	}
 }
+
 func BenchmarkLastIndexStrings(b *testing.B) {
 	r := "abcdef"
 	n := "cd"
@@ -134,6 +136,7 @@ func BenchmarkIndexAnyRunes(b *testing.B) {
 		IndexAny(s, c)
 	}
 }
+
 func BenchmarkIndexAnyStrings(b *testing.B) {
 	s := "...b..."
 	c := "abc"
@@ -151,6 +154,7 @@ func BenchmarkIndexRuneRunes(b *testing.B) {
 		IndexRune(s, r)
 	}
 }
+
 func BenchmarkIndexRuneStrings(b *testing.B) {
 	s := "...b..."
 	r := 'b'
@@ -168,6 +172,7 @@ func BenchmarkIndexRunes(b *testing.B) {
 		Index(r, n)
 	}
 }
+
 func BenchmarkIndexStrings(b *testing.B) {
 	r := "abcdef"
 	n := "cd"

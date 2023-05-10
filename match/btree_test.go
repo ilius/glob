@@ -65,9 +65,11 @@ func (f *fakeMatcher) Index(s string) (int, []int) {
 	}
 	return 0, seg
 }
+
 func (f *fakeMatcher) Len() int {
 	return f.len
 }
+
 func (f *fakeMatcher) String() string {
 	return f.name
 }

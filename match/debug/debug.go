@@ -3,8 +3,9 @@ package debug
 import (
 	"bytes"
 	"fmt"
-	"github.com/gobwas/glob/match"
 	"math/rand"
+
+	"github.com/gobwas/glob/match"
 )
 
 func Graphviz(pattern string, m match.Matcher) string {
