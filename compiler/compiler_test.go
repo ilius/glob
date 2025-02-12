@@ -4,9 +4,9 @@ import (
 	"reflect"
 	"testing"
 
-	"github.com/gobwas/glob/match"
-	"github.com/gobwas/glob/match/debug"
-	"github.com/gobwas/glob/syntax/ast"
+	"github.com/ilius/glob/match"
+	"github.com/ilius/glob/match/debug"
+	"github.com/ilius/glob/syntax/ast"
 )
 
 var separators = []rune{'.'}

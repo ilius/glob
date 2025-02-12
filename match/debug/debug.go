@@ -5,7 +5,7 @@ import (
 	"fmt"
 	"math/rand"
 
-	"github.com/gobwas/glob/match"
+	"github.com/ilius/glob/match"
 )
 
 func Graphviz(pattern string, m match.Matcher) string {

@@ -8,9 +8,9 @@ import (
 	"log"
 	"reflect"
 
-	"github.com/gobwas/glob/match"
-	"github.com/gobwas/glob/syntax/ast"
-	"github.com/gobwas/glob/util/runes"
+	"github.com/ilius/glob/match"
+	"github.com/ilius/glob/syntax/ast"
+	"github.com/ilius/glob/util/runes"
 )
 
 func optimizeMatcher(matcher match.Matcher) match.Matcher {

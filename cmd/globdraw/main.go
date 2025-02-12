@@ -7,9 +7,9 @@ import (
 	"strings"
 	"unicode/utf8"
 
-	"github.com/gobwas/glob"
-	"github.com/gobwas/glob/match"
-	"github.com/gobwas/glob/match/debug"
+	"github.com/ilius/glob"
+	"github.com/ilius/glob/match"
+	"github.com/ilius/glob/match/debug"
 )
 
 func main() {
